@@ -33,10 +33,10 @@ resource "openstack_compute_instance_v2" "instance" {
   }
 
   dynamic "network" {
-    for_each = openstack_networking_port_v2.port
+    for_each = var.ports
 
     content {
-      port = network.value["id"]
+      port = openstack_networking_port_v2.port[network.key].id
     }
   }
 
@@ -58,22 +58,21 @@ resource "openstack_networking_port_v2" "port" {
   port_security_enabled = var.ports[count.index].port_security
 
   dynamic "allowed_address_pairs" {
-    for_each = var.allowed_addresses
+    for_each = var.ports[count.index].allowed_address_pairs
     content {
       ip_address = allowed_address_pairs.value
     }
   }
-
 }
 
-# Create floating ip
+# Create floating IP
 resource "openstack_networking_floatingip_v2" "ip" {
   count = var.public_ip_network == null ? 0 : 1
 
   pool = var.public_ip_network
 }
 
-# Attach floating ip to port
+# Attach floating IP to port
 resource "openstack_networking_floatingip_associate_v2" "ipa" {
   count = var.public_ip_network == null ? 0 : 1
 

@@ -50,27 +50,22 @@ variable "ports" {
     security_group_ids = optional(list(string))
     ip_address         = optional(string)
     port_security      = optional(bool)
-    allowed_address    = optional(list(string))
+    allowed_address_pairs = optional(list(object({
+      ip_address = string
+    })))
   }))
   default = [
     {
-      name          = ""
-      network_id    = ""
-      subnet_id     = ""
-      port_security = true
+      name               = ""
+      network_id         = ""
+      subnet_id          = ""
+      port_security      = true
+      allowed_address_pairs = []
     }
   ]
   description = <<EOF
 The ports list, at least 1 port is required
 EOF
-}
-
-variable "allowed_addresses" {
-  type        = list(string)
-  description = <<EOF
-Allowed addresses on ports
-EOF
-  default     = []
 }
 
 variable "block_device_volume_size" {
@@ -81,14 +76,6 @@ EOF
   default     = 20
 }
 
-variable "block_volume_type" {
-  type        = string
-  description = <<EOF
-Instance's block volume type
-EOF
-  default     = ""
-}
-
 variable "block_device_delete_on_termination" {
   type        = bool
   description = <<EOF
@@ -96,15 +83,6 @@ Delete block device when instance is shut down
 EOF
   default     = true
 }
-
-# variable "port_security" {
-#   type = bool
-#   description = <<EOF
-# Whether to explicitly enable or disable port security on the port.
-# In order to disable port security, the port must not have any security groups.
-# EOF
-#   default = true
-# }
 
 variable "server_groups" {
   type        = list(string)
