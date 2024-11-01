@@ -84,6 +84,18 @@ EOF
   default     = true
 }
 
+variable "volume_type" {
+  type        = string
+  description = "The type of volume to use, e.g., 'ceph-ssd' or 'ceph-hdd'"
+  default     = "ceph-ssd"
+}
+
+variable "instance_volume_type" {
+  type        = string
+  description = "The volume type for the instance-specific block device, e.g., 'ceph-ssd' or 'ceph-hdd'"
+  default     = "ceph-ssd"
+}
+
 variable "server_groups" {
   type        = list(string)
   description = <<EOF

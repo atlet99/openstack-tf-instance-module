@@ -2,7 +2,7 @@
 resource "openstack_blockstorage_volume_v3" "volume_os" {
   name                 = var.name
   size                 = var.block_device_volume_size
-  volume_type          = "ceph-ssd"
+  volume_type          = var.volume_type
   image_id             = var.image_id
   enable_online_resize = true
 }
@@ -17,6 +17,7 @@ resource "openstack_compute_instance_v2" "instance" {
     source_type           = "volume"
     boot_index            = 0
     destination_type      = "volume"
+    volume_type           = var.instance_volume_type
     delete_on_termination = var.block_device_delete_on_termination
   }
 
