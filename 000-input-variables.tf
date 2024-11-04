@@ -86,13 +86,13 @@ EOF
 
 variable "volume_type" {
   type        = string
-  description = "The type of volume to use, e.g., 'ceph-ssd' or 'ceph-hdd'"
+  description = "The type of volume to use, e.g., 'ceph-ssd', 'kz-ala-1-san-nvme-h1' or 'ceph-hdd'"
   default     = "ceph-ssd"
 }
 
 variable "instance_volume_type" {
   type        = string
-  description = "The volume type for the instance-specific block device, e.g., 'ceph-ssd' or 'ceph-hdd'"
+  description = "The volume type for the instance-specific block device, e.g., 'ceph-ssd', 'kz-ala-1-san-nvme-h1' or 'ceph-hdd'"
   default     = "ceph-ssd"
 }
 
