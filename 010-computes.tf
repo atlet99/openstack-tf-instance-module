@@ -17,7 +17,6 @@ resource "openstack_compute_instance_v2" "instance" {
     source_type           = "volume"
     boot_index            = 0
     destination_type      = "volume"
-    volume_type           = var.instance_volume_type
     delete_on_termination = var.block_device_delete_on_termination
   }
 

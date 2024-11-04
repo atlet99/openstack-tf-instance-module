@@ -90,12 +90,6 @@ variable "volume_type" {
   default     = "ceph-ssd"
 }
 
-variable "instance_volume_type" {
-  type        = string
-  description = "The volume type for the instance-specific block device, e.g., 'ceph-ssd', 'kz-ala-1-san-nvme-h1' or 'ceph-hdd'"
-  default     = "ceph-ssd"
-}
-
 variable "server_groups" {
   type        = list(string)
   description = <<EOF
