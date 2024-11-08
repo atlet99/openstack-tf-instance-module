@@ -58,9 +58,10 @@ resource "openstack_networking_port_v2" "port" {
   port_security_enabled = var.ports[count.index].port_security
 
   dynamic "allowed_address_pairs" {
-    for_each = lookup(var.ports[count.index], "allowed_address_pairs", [])
+    for_each = var.ports[count.index].allowed_address_pairs
     content {
-      ip_address = allowed_address_pairs.value.ip_address
+      ip_address  = allowed_address_pairs.value.ip_address
+      mac_address = lookup(allowed_address_pairs.value, "mac_address", null)
     }
   }
 }

@@ -51,21 +51,23 @@ variable "ports" {
     ip_address         = optional(string)
     port_security      = optional(bool)
     allowed_address_pairs = optional(list(object({
-      ip_address = string
-    })))
+      ip_address  = string
+      mac_address = optional(string)
+    })), [])
   }))
   default = [
     {
       name               = ""
       network_id         = ""
       subnet_id          = ""
+      admin_state_up     = true
+      security_group_ids = []
+      ip_address         = null
       port_security      = true
       allowed_address_pairs = []
     }
   ]
-  description = <<EOF
-The ports list, at least 1 port is required
-EOF
+  description = "The ports list, at least 1 port is required"
 }
 
 variable "block_device_volume_size" {
