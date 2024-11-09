@@ -2,19 +2,16 @@
 
 _This project aims to create a module to deploy instance(s) on openstack provider._
 
-![Release](https://github.com/tf-openstack-modules/terraform-openstack-instances/workflows/Release/badge.svg)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/tf-openstack-modules/terraform-openstack-instances)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/atlet99/openstack-tf-instance-module)
 
-## Where to find module documentations
-
-You can find differents documentations versionned by terraform registry [here](https://registry.terraform.io/modules/tf-openstack-modules/instances/openstack/latest).
+**Note:** This module requires **Terraform version 1.5.0** or higher and **OpenStack provider version 3.0.0** or higher.
 
 ## Usage examples
 
 ```terraform
 module "test_instance_simple" {
-	source  = "tf-openstack-modules/instances/openstack"
-	version = "<version>"
+	source  = "github.com/atlet99/openstack-tf-instance-module"
+	version = "v1.0.0"
  
 	name = "instance"
 	flavor_name = "m1.xs" 
