@@ -16,7 +16,7 @@ output "floating_ip" {
 
 output "instance_info" {
   value = [
-    for index, instance in openstack_compute_instance_v2.instance : {
+    for index, instance in tolist(openstack_compute_instance_v2.instance) : {
       id          = instance.id
       name        = instance.name
       ports       = [
@@ -28,5 +28,5 @@ output "instance_info" {
       ]
     }
   ]
-  description = "Detailed information for each instance, including port tags and floating IPs."
+  description = "Detailed information for each instance, including port tags."
 }
