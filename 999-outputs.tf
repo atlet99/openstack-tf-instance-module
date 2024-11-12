@@ -12,7 +12,7 @@ output "all_metadata" {
 
 output "instance_info" {
   value = [
-    for instance in openstack_compute_instance_v2.instance : {
+    for index, instance in openstack_compute_instance_v2.instance : {
       id          = instance.id
       name        = instance.name
       ports       = [
@@ -22,7 +22,7 @@ output "instance_info" {
           tags = port.tags
         } if port.id != null
       ]
-      floating_ip = try(openstack_networking_floatingip_v2.ip[count.index].address, null)
+      floating_ip = index < length(openstack_networking_floatingip_v2.ip) ? try(openstack_networking_floatingip_v2.ip[index].address, null) : null
     }
   ]
   description = "Detailed information for each instance, including port tags and floating IPs."
