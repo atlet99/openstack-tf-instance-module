@@ -22,7 +22,7 @@ output "instance_info" {
           tags = p.tags
         } if p.id != null
       ]
-      floating_ip = index < length(openstack_networking_floatingip_v2.ip) ? openstack_networking_floatingip_v2.ip[index].address : null
+      floating_ip = index < length(openstack_networking_floatingip_v2.ip) && length(openstack_networking_floatingip_v2.ip) > 0 ? openstack_networking_floatingip_v2.ip[index].address : null
     }
   ]
   description = "Detailed information for each instance, including port tags and floating IPs."
