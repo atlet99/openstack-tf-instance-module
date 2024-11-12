@@ -16,7 +16,7 @@ output "floating_ip" {
 
 output "instance_info" {
   value = [
-    for index, instance in tolist(openstack_compute_instance_v2.instance) : {
+    for instance in (length([openstack_compute_instance_v2.instance]) > 1 ? openstack_compute_instance_v2.instance : [openstack_compute_instance_v2.instance]) : {
       id          = instance.id
       name        = instance.name
       ports       = [
