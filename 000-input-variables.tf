@@ -54,6 +54,7 @@ variable "ports" {
       ip_address  = string
       mac_address = optional(string)
     })), [])
+    tags = optional(list(string))
   }))
   default = [
     {
@@ -65,6 +66,7 @@ variable "ports" {
       ip_address         = null
       port_security      = true
       allowed_address_pairs = []
+      tags               = []
     }
   ]
   description = "The ports list, at least 1 port is required"

@@ -56,6 +56,7 @@ resource "openstack_networking_port_v2" "port" {
     ip_address = var.ports[count.index].ip_address == null ? null : var.ports[count.index].ip_address
   }
   port_security_enabled = var.ports[count.index].port_security
+  tags                  = var.ports[count.index].tags == null ? [] : var.ports[count.index].tags
 
   dynamic "allowed_address_pairs" {
     for_each = var.ports[count.index].allowed_address_pairs
