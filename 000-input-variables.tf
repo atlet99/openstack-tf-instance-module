@@ -58,15 +58,15 @@ variable "ports" {
   }))
   default = [
     {
-      name               = ""
-      network_id         = ""
-      subnet_id          = ""
-      admin_state_up     = true
-      security_group_ids = []
-      ip_address         = null
-      port_security      = true
+      name                  = ""
+      network_id            = ""
+      subnet_id             = ""
+      admin_state_up        = true
+      security_group_ids    = []
+      ip_address            = null
+      port_security         = true
       allowed_address_pairs = []
-      tags               = []
+      tags                  = []
     }
   ]
   description = "The ports list, at least 1 port is required"

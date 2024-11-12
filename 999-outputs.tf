@@ -17,9 +17,9 @@ output "floating_ip" {
 output "instance_info" {
   value = [
     for instance in flatten([openstack_compute_instance_v2.instance]) : {
-      id          = instance.id
-      name        = instance.name
-      ports       = [
+      id   = instance.id
+      name = instance.name
+      ports = [
         for port in openstack_networking_port_v2.port : {
           id   = port.id
           name = port.name
