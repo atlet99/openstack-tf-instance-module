@@ -25,6 +25,9 @@ resource "openstack_compute_instance_v2" "instance" {
   config_drive = true
   user_data    = var.user_data
 
+  # Metadata block: combines existing OpenStack metadata with custom metadata
+  metadata = { for key, value in var.metadata : key => value if value != null }
+
   dynamic "scheduler_hints" {
     for_each = var.server_groups
     content {

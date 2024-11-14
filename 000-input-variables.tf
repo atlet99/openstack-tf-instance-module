@@ -107,3 +107,23 @@ variable "tags" {
   default     = null
   description = "The instances tags"
 }
+
+variable "metadata" {
+  type = map(string)
+  description = <<-EOF
+  Metadata for the OpenStack instance, used for categorization and identification of the service across environments and projects:
+  - environment: Specifies the deployment environment (e.g., "dev", "staging", "prod", "infra") to indicate where the instance is used.
+  - project: Defines the project name or identifier associated with this instance (e.g., "tesla"), useful for organizing and filtering resources within larger environments.
+  - service_type: Describes the type of service provided by this instance (e.g., "runner", "database", "web"), helping to classify the role of the instance in the architecture.
+  - service_name: A unique name for the specific service this instance runs (e.g., "tesla_runner_infra"), enabling more granular tracking and management of resources.
+  - service_role: Defines the role of the instance within the service (e.g., "master", "worker", "backup"), useful for distributed or clustered services with distinct roles.
+  These metadata fields allow for more effective resource organization, monitoring, and automated management within OpenStack and other third-party integrations.
+  EOF
+  default = {
+    environment   = null
+    project       = null
+    service_type  = null
+    service_name  = null
+    service_role  = null
+  }
+}
