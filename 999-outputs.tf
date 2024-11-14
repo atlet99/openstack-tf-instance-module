@@ -1,32 +1,30 @@
-output "instance" {
-  value = openstack_compute_instance_v2.instance
+# Output for instance IDs as a flat list
+output "instance_ids" {
+  value = [openstack_compute_instance_v2.instance.id]
+  description = "Flat list of instance IDs."
 }
 
-output "ip" {
-  value = openstack_networking_floatingip_v2.ip[*].address
+# Output for private IPs as a flat list
+output "private_ips" {
+  value = [for port in openstack_networking_port_v2.port : port.fixed_ip[0].ip_address]
+  description = "Flat list of private IP addresses for each port."
 }
 
-output "all_metadata" {
-  value = openstack_compute_instance_v2.instance.metadata
+# Output for floating IPs as a flat list
+output "floating_ips" {
+  value = length(openstack_networking_floatingip_v2.ip) > 0 ? openstack_networking_floatingip_v2.ip[*].address : []
+  description = "Flat list of floating IP addresses, if any."
 }
 
-output "floating_ip" {
-  value = openstack_networking_floatingip_v2.ip[*].address
-}
-
+# Output for ports with details as a flat list
 output "instance_info" {
   value = [
-    for instance in flatten([openstack_compute_instance_v2.instance]) : {
-      id   = instance.id
-      name = instance.name
-      ports = [
-        for port in openstack_networking_port_v2.port : {
-          id   = port.id
-          name = port.name
-          tags = port.tags
-        } if port.id != null
-      ]
+    for port in openstack_networking_port_v2.port : {
+      id         = port.id
+      name       = port.name
+      tags       = port.tags
+      private_ip = port.fixed_ip[0].ip_address
     }
   ]
-  description = "Detailed information for each instance, including port tags."
+  description = "Flat list of ports with tags, names, and private IPs for the instance."
 }
