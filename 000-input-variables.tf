@@ -108,8 +108,10 @@ variable "tags" {
   description = "The instances tags"
 }
 
+# Added all information about metadata;
+
 variable "metadata" {
-  type = map(string)
+  type        = map(string)
   description = <<-EOF
   Metadata for the OpenStack instance, used for categorization and identification of the service across environments and projects:
   - environment: Specifies the deployment environment (e.g., "dev", "staging", "prod", "infra") to indicate where the instance is used.
@@ -120,10 +122,10 @@ variable "metadata" {
   These metadata fields allow for more effective resource organization, monitoring, and automated management within OpenStack and other third-party integrations.
   EOF
   default = {
-    environment   = null
-    project       = null
-    service_type  = null
-    service_name  = null
-    service_role  = null
+    environment  = null
+    project      = null
+    service_type = null
+    service_name = null
+    service_role = null
   }
 }
