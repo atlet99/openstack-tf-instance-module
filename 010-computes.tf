@@ -17,7 +17,7 @@ resource "openstack_networking_port_v2" "main_port" {
     subnet_id  = var.ports[0].subnet_id
     ip_address = var.ports[0].ip_address
   }
-  allowed_address_pairs = var.ports[0].allowed_address_pairs
+  allowed_address       = var.ports[0].allowed_address_pairs
   port_security_enabled = var.ports[0].port_security
   tags                  = var.ports[0].tags == null ? [] : var.ports[0].tags
 }
@@ -70,7 +70,7 @@ resource "openstack_networking_port_v2" "additional_ports" {
     subnet_id  = var.ports[count.index + 1].subnet_id
     ip_address = var.ports[count.index + 1].ip_address
   }
-  allowed_address_pairs = var.ports[count.index + 1].allowed_address_pairs
+  allowed_address       = var.ports[count.index + 1].allowed_address_pairs
   port_security_enabled = var.ports[count.index + 1].port_security
   tags                  = var.ports[count.index + 1].tags == null ? [] : var.ports[count.index + 1].tags
 }
