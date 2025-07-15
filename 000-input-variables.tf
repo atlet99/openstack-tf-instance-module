@@ -152,3 +152,10 @@ variable "region" {
   default     = ""
   description = "Region where volume's located."
 }
+
+# Added additional AZ info for volume
+variable "availability_zone" {
+  type        = string
+  default     = ""
+  description = "AZ where volume's available."
+}

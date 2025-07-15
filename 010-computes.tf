@@ -6,6 +6,7 @@ resource "openstack_blockstorage_volume_v3" "volume_os" {
   image_id             = var.image_id
   enable_online_resize = true
   region               = var.region == null ? null : var.region
+  availability_zone    = var.availability_zone == null ? null : var.availability_zone
 }
 
 # Create the main network port
