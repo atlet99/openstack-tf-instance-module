@@ -145,3 +145,10 @@ variable "attach_floating_ip" {
   description = "Flag to indicate if floating IPs should be attached to the additional ports."
   default     = true
 }
+
+# Added additional region info for volume
+variable "region" {
+  type        = string
+  default     = ""
+  description = "Region where volume's located."
+}
